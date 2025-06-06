@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+body {
+    @apply font-sans text-black;
+    font-family: "Bricolage Grotesque", sans-serif;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+.paginate-integers p {
+    margin: 0 10px;
+}
+
+.irs--flat .irs-bar,
+.irs--flat .irs-bar-edge {
+    background-color: #000;
+    border-color: #6b21a8;
+}
+
+.irs--flat .irs-handle {
+    border-radius: 50%;
+    background-color: #000;
+    border-color: #6b21a8;
+}
+.irs--flat .type_last {
+    border-radius: 50%;
+    background-color: #000;
+    border-color: #6b21a8;
+}
+
+.irs--flat .irs-from {
+    background-color: #000;
+    color: #fff;
+}
+
+.irs--flat .irs-to {
+    background-color: #000;
+    color: #fff;
+}
+
+.irs--flat .irs-handle > i:first-child {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    background-color: #fff1f2;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+.animate-pulse {
+    animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#mapOne {
+    position: relative;
+}
+
+.jvm-tooltip {
+    position: absolute;
+    max-width: 160px;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: "Bricolage Grotesque", sans-serif;
+    background-color: rgba(240, 240, 240, 0.8);
+    color: #000;
+    padding: 4px 8px;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-size: 12px;
+}
