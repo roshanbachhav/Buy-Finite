@@ -52,5 +52,5 @@ composer require laravel/socialite
 
 ### Run
 composer run dev (This run boths vite + laravel)
---
+
 php artisan serve (This on for Laravel)
