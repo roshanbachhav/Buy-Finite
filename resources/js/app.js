@@ -214,11 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     fill: "#465fff",
                 },
             },
-            markers: [
-                { name: "india", coords: [19.076, 72.8777] },
-                { name: "india", coords: [30.5937, 78.9629] },
-                { name: "india", coords: [25.5937, 70.9629] },
-            ],
+            markers: [{ name: "india", coords: [19.076, 72.8777] }],
             markerStyle: {
                 initial: {
                     strokeWidth: 1,

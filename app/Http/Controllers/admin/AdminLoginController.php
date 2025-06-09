@@ -14,11 +14,6 @@ class AdminLoginController extends Controller
         return view('admin.adminLogin');
     }
 
-    // public function dashboard()
-    // {
-    //     return view('admin.adminDashboard');
-    // }
-
     public function postAdminLogin(Request $request)
     {
         $success = "Welcome Chief to our website";
@@ -37,7 +32,7 @@ class AdminLoginController extends Controller
                 Auth::guard('admin')->logout();
                 return redirect()->route('adminLogin')->with('error', $error);
             }
-            return redirect()->route('dashboard')->with('success', $success);
+            return redirect()->intended(route('dashboard'))->with('success', $success);
         }
 
         return redirect()->route('adminLogin')->with('error', 'Invalid email or password!');

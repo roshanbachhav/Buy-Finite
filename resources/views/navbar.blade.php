@@ -23,10 +23,10 @@
                             class="text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Sign
                             Up</a>
                     @else
-                        <a href="{{ route('userLogout') }}"
-                            class="text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Logout</a>
                         <a href="{{ route('userProfile') }}"
                             class="text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Profile</a>
+                        <a href="{{ route('userLogout') }}"
+                            class="text-gray-900 hover:text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Logout</a>
                     @endif
                 </div>
             </div>

@@ -114,4 +114,6 @@ class HomeController extends Controller
             'message' => "Mail Send Successful",
         ], 200);
     }
+
+
 }

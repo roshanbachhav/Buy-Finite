@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ContactUs;
 use App\Models\Order;
 use App\Models\OrderData;
 use App\Models\Product;
@@ -16,6 +17,7 @@ class AdminDashboardController extends Controller
 {
     public function dashboard()
     {
+        $notifications = ContactUs::whereNull('read_at')->paginate(3);
 
         $totalUsers = User::where('role', '!=', '0')->count();
         $totalProducts = Product::all()->count();
@@ -65,7 +67,7 @@ class AdminDashboardController extends Controller
         $sales = array_values($sales);
         $salesRevenues = array_values($salesRevenues);
 
-        return view('admin.adminDashboard', compact('adminDetails', 'unCanceledOrder', 'totalRevenue', 'totalProducts', 'totalUsers', 'totalOrders', 'recentOrders', 'months', 'revenues', 'sales', 'salesRevenues'));
+        return view('admin.adminDashboard', compact('adminDetails', 'unCanceledOrder', 'totalRevenue', 'totalProducts', 'totalUsers', 'totalOrders', 'recentOrders', 'months', 'revenues', 'sales', 'salesRevenues', 'notifications'));
     }
 
 }

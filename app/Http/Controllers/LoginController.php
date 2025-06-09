@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Mail\RecoveryPasswordMail;
+use App\Mail\WelcomeNewUserMail;
+use App\Models\Coupon;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
@@ -40,11 +42,8 @@ class LoginController extends Controller
             'password.required' => 'Please fill password field',
         ]);
 
-        if (session()->has('url.intended')) {
-            session(['url.intended' => url()->previous()]);
-        }
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return redirect()->route('home')->with('success', $successMessage);
+            return redirect()->intended(route('home'))->with('success', $successMessage);
         } else {
             return redirect()->route('login')->with('error', $issueMessage);
         }
@@ -78,6 +77,31 @@ class LoginController extends Controller
         $user->password = Hash::make($request->password);
         $user->role = 1;
         $user->save();
+
+        $prefix = strtoupper(Str::slug(Str::words($user->name, 1, ''), ''));
+        $percentage = rand(10, 50);
+        $code = $prefix . $percentage;
+
+        $coupon = new Coupon();
+        $coupon->code = $code;
+        $coupon->type = 'percent';
+        $coupon->value = $percentage;
+        $coupon->min_amount = 2000;
+        $coupon->start_date = now();
+        $coupon->end_date = now()->addDay(3);
+        $coupon->usage_limit = 1;
+        $coupon->used_count = 0;
+        $coupon->is_active = 1;
+        $coupon->save();
+
+        $userData = ([
+            'user' => $user,
+            'coupon' => $coupon,
+            'subject' => '🎉 Welcome To Buy Finite.'
+        ]);
+
+        Mail::to($user->email)->send(new WelcomeNewUserMail($userData));
+
         Auth::login($user);
         return redirect()->route('home')->with('success', $successMessage);
     }

@@ -119,7 +119,7 @@
                                     </div>
 
                                     <div class="col-span-1">
-                                        <div class="text-xs truncate">{{ $s->state->state_name }}</div>
+                                        <div class="text-xs truncate"> {{ $s->state->state_name }}</div>
                                     </div>
 
                                     <div class="col-span-1">

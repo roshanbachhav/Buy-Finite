@@ -73,9 +73,23 @@ class AdministratorController extends Controller
         ]);
     }
 
-    public function getContactUs()
+    public function getContactUs(Request $request)
     {
-        $messages = ContactUs::orderBy('created_at', 'desc')->paginate(10);
+        $query = ContactUs::query();
+
+        if ($request->read === 'read') {
+            $query->whereNotNull('read_at');
+        } elseif ($request->read === 'unread') {
+            $query->whereNull('read_at');
+        }
+
+        if ($request->status === 'resolved') {
+            $query->where('is_resolved', 1);
+        } elseif ($request->status === 'unresolved') {
+            $query->where('is_resolved', '!=', 1)->orWhereNull('is_resolved');
+        }
+
+        $messages = $query->orderByDesc('created_at')->paginate(10);
         return view('admin.administrator.contact_us', compact('messages'));
     }
 
